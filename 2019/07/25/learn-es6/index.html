@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>ES6新技能 | Bin 博客</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">ES6新技能</h1><a id="logo" href="/.">Bin 博客</a><p class="description">一名资深IT开发者.</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">ES6新技能</h1><div class="post-meta">Jul 25, 2019</div><div class="post-content"><p>1、数据解构赋值<br>1、数组的解构赋值<br>        基本用法:let  [key1,key2…]=[value1,value2…]</p>
+<pre><code>let [name,age,sex]=[&apos;小明&apos;,24,&apos;男&apos;];
+console.log(name);
+console.log(age);
+console.log(sex);
+    注意左右的key与value格式要匹配对应，键值可以缺省，但逗号的位置要正确
+
+let [arr1,,[arr3,,[,arr6]]]=[1,2,[31,32,[331,332]]];
+console.log(arr1);
+console.log(arr3);
+console.log(arr6);
+</code></pre><p>2、对象的解构赋值</p>
+<pre><code>    用法：let  {key1,key2...}={key1:value1,key2:value2...}   
+
+let obj={name:&apos;小明&apos;,age:24,sex:&apos;男&apos;,friend:[&apos;小张&apos;,&apos;小李&apos;]};
+console.log(obj.name);
+console.log(obj.age);
+console.log(obj.sex);
+console.log(obj.friend);
+</code></pre><p>3、字符串类型</p>
+<pre><code>    字符串中每个字符与数组键对应
+
+let [a,b,c]=&quot;这是一个字符串&quot;;
+console.log(a);
+console.log(b);
+console.log(c);
+</code></pre><p>2、新增数据类型Set集合<br>    set与数组不同在于set中不可以有重复数据,常用于去重操作<br>1、创建set</p>
+<p> let myset=new Set([‘data1’,’data2’,’data3’,’data3’]);<br>2、属性size：集合的元素个数  </p>
+<p>console.log(myset.size);<br>3、方法</p>
+<pre><code>myset.add(&apos;data4&apos;);//增加元素
+myset.delete(&apos;data2&apos;);//删除元素
+console.log(myset.has(&apos;data1&apos;));//判断是否含有某个元素，包含返回true
+myset.clear();//清除集合所有元素
+console.log(myset.keys());//返回集合所有的键值
+console.log(myset.values());//返回集合所有值
+</code></pre><p>3、新增数据类型Map<br>     由于对象的键值只能是字符串，不可以是对象类型，使用对象作为键值会被toString转化为字符串”[object Object]”，例如：</p>
+<pre><code>let obj1={key:1},obj2={key:2},obj={};
+obj.value=&apos;objValue&apos;;
+obj[obj1]=&apos;obj1Value&apos;;    //将对象obj1作为obj的键值
+obj[obj2]=&apos;obj2Value&apos;;
+console.log(obj);
+输出：Object { value: &quot;objValue&quot;, &quot;[object Object]&quot;: &quot;obj2Value&quot; }，由于转化为相同的键值字符串，obj2会覆盖obj1
+
+而使用map可以避免键值必须为字符串的限制,其键值可以为对象、数组等
+</code></pre><p>1、创建Map</p>
+<pre><code>let mymap=new Map([
+    [&apos;stringKey&apos;,&apos;stringValue&apos;],
+    [&apos;age&apos;,24],
+    [obj1,&apos;obj1Value&apos;],
+    [obj2,&apos;obj2Value&apos;],
+    [[&apos;arr&apos;],&apos;arrValue&apos;]
+]);
+打印mymap如下：
+</code></pre><p>2、属性size：返回map中键值对个数  </p>
+<p> console.log(mymap.size);<br>3、方法</p>
+<pre><code>mymap.set(&apos;key&apos;,&apos;value&apos;);//设置map的键、值
+mymap.get(&apos;key&apos;);//通过键来取值
+mymap.delete(&apos;key&apos;);//删除对应的键值
+mymap.has(&apos;key&apos;);//判断是否含有
+//mymap.clear();//清除map中所有键值
+//遍历
+mymap.forEach(function (value,key) {
+    console.log(key+&quot;:&quot;+value);
+})
+</code></pre><p>4、注意{}与{}是不同的两个键值</p>
+<pre><code>mymap.set({},&quot;obj1&quot;);
+mymap.set({},&quot;obj2&quot;);
+以上语句obj2不会覆盖obj1，由于空对象{}在内存中不同的堆区申请存储空间，所以作为键值它们是不同的
+</code></pre><p>4、Symbol类型<br>    在用相同的字符串对对象属性名或方法进行命名时会发生命名冲突，而使用symbol产生的名字是不同的，例如：</p>
+<pre><code>let obj={};
+obj[Symbol(&apos;name&apos;)]=&quot;小赵&quot;;
+obj[Symbol(&apos;name&apos;)]=&quot;小钱&quot;;
+console.log(obj);
+结果如下，不会覆盖第一句：
+</code></pre><p>5、Symbol应用场景<br>ES6中引入了一种新的基础数据类型：Symbol，不过很多开发者可能都不怎么了解它，或者觉得在实际的开发工作中并没有什么场景应用到它，那么今天我们来讲讲这个数据类型，并看看我们怎么来利用它来改进一下我们的代码。<br>这是一种新的基础数据类型（primitive type）<br>Symbol是由ES6规范引入的一项新特性，它的功能类似于一种标识唯一性的ID。通常情况下，我们可以通过调用Symbol()函数来创建一个Symbol实例：<br>let s1 = Symbol()</p>
+<p>或者，你也可以在调用Symbol()函数时传入一个可选的字符串参数，相当于给你创建的Symbol实例一个描述信息：<br>let s2 = Symbol(‘another symbol’)</p>
+<p>如果用当下比较流行的TypeScript的方式来描述这个Symbol()函数的话，可以表示成：<br>/**</p>
+<ul>
+<li>@param  {any} description 描述信息。可以是任何可以被转型成字符串的值，如：字符串、数字、对象、数组等<br>*/<br>function Symbol(description?: any): symbol</li>
+</ul>
+<p>由于Symbol是一种基础数据类型，所以当我们使用typeof去检查它的类型的时候，它会返回一个属于自己的类型symbol，而不是什么string、object之类的：<br>typeof s1  // ‘symbol’</p>
+<p>另外，我们需要重点记住的一点是：每个Symbol实例都是唯一的。因此，当你比较两个Symbol实例的时候，将总会返回false：<br>let s1 = Symbol()<br>let s2 = Symbol(‘another symbol’)<br>let s3 = Symbol(‘another symbol’)</p>
+<p>s1 === s2 // false<br>s2 === s3 // false</p>
+<p>应用场景1：使用Symbol来作为对象属性名(key)<br>在这之前，我们通常定义或访问对象的属性时都是使用字符串，比如下面的代码：<br>let obj = {<br>  abc: 123,<br>  “hello”: “world”<br>}</p>
+<p>obj[“abc”] // 123<br>obj[“hello”] // ‘world’</p>
+<p>而现在，Symbol可同样用于对象属性的定义和访问：<br>const PROP_NAME = Symbol()<br>const PROP_AGE = Symbol()</p>
+<p>let obj = {<br>  [PROP_NAME]: “一斤代码”<br>}<br>obj[PROP_AGE] = 18</p>
+<p>obj[PROP_NAME] // ‘一斤代码’<br>obj[PROP_AGE] // 18</p>
+<p>随之而来的是另一个非常值得注意的问题：就是当使用了Symbol作为对象的属性key后，在对该对象进行key的枚举时，会有什么不同？在实际应用中，我们经常会需要使用Object.keys()或者for…in来枚举对象的属性名，那在这方面，Symbol类型的key表现的会有什么不同之处呢？来看以下示例代码：<br>let obj = {<br>   [Symbol(‘name’)]: ‘一斤代码’,<br>   age: 18,<br>   title: ‘Engineer’<br>}</p>
+<p>Object.keys(obj)   // [‘age’, ‘title’]</p>
+<p>for (let p in obj) {<br>   console.log(p)   // 分别会输出：’age’ 和 ‘title’<br>}</p>
+<p>Object.getOwnPropertyNames(obj)   // [‘age’, ‘title’]</p>
+<p>由上代码可知，Symbol类型的key是不能通过Object.keys()或者for…in来枚举的，它未被包含在对象自身的属性名集合(property names)之中。所以，利用该特性，我们可以把一些不需要对外操作和访问的属性使用Symbol来定义。<br>也正因为这样一个特性，当使用JSON.stringify()将对象转换成JSON字符串的时候，Symbol属性也会被排除在输出内容之外：<br>JSON.stringify(obj)  // {“age”:18,”title”:”Engineer”}</p>
+<p>我们可以利用这一特点来更好的设计我们的数据对象，让“对内操作”和“对外选择性输出”变得更加优雅。<br>然而，这样的话，我们就没办法获取以Symbol方式定义的对象属性了么？非也。还是会有一些专门针对Symbol的API，比如：<br>// 使用Object的API<br>Object.getOwnPropertySymbols(obj) // [Symbol(name)]</p>
+<p>// 使用新增的反射API<br>Reflect.ownKeys(obj) // [Symbol(name), ‘age’, ‘title’]</p>
+<p>应用场景2：使用Symbol来替代常量<br>先来看一下下面的代码，是不是在你的代码里经常会出现？<br>const TYPE_AUDIO = ‘AUDIO’<br>const TYPE_VIDEO = ‘VIDEO’<br>const TYPE_IMAGE = ‘IMAGE’</p>
+<p>function handleFileResource(resource) {<br>  switch(resource.type) {<br>    case TYPE_AUDIO:<br>      playAudio(resource)<br>      break<br>    case TYPE_VIDEO:<br>      playVideo(resource)<br>      break<br>    case TYPE_IMAGE:<br>      previewImage(resource)<br>      break<br>    default:<br>      throw new Error(‘Unknown type of resource’)<br>  }<br>}</p>
+<p>如上面的代码中那样，我们经常定义一组常量来代表一种业务逻辑下的几个不同类型，我们通常希望这几个常量之间是唯一的关系，为了保证这一点，我们需要为常量赋一个唯一的值（比如这里的’AUDIO’、’VIDEO’、 ‘IMAGE’），常量少的时候还算好，但是常量一多，你可能还得花点脑子好好为他们取个好点的名字。<br>现在有了Symbol，我们大可不必这么麻烦了：<br>const TYPE_AUDIO = Symbol()<br>const TYPE_VIDEO = Symbol()<br>const TYPE_IMAGE = Symbol()</p>
+<p>这样定义，直接就保证了三个常量的值是唯一的了！是不是挺方便的呢。<br>应用场景3：使用Symbol定义类的私有属性/方法<br>我们知道在JavaScript中，是没有如Java等面向对象语言的访问控制关键字private的，类上所有定义的属性或方法都是可公开访问的。因此这对我们进行API的设计时造成了一些困扰。<br>而有了Symbol以及模块化机制，类的私有属性和方法才变成可能。例如：</p>
+<p>在文件 a.js中</p>
+<p>const PASSWORD = Symbol()</p>
+<p>class Login {<br>  constructor(username, password) {<br>    this.username = username<br>    this[PASSWORD] = password<br>  }</p>
+<p>  checkPassword(pwd) {<br>      return this[PASSWORD] === pwd<br>  }<br>}</p>
+<p>export default Login</p>
+<p>在文件 b.js 中</p>
+<p>import Login from ‘./a’</p>
+<p>const login = new Login(‘admin’, ‘123456’)</p>
+<p>login.checkPassword(‘123456’)  // true</p>
+<p>login.PASSWORD  // oh!no!<br>login[PASSWORD] // oh!no!<br>login[“PASSWORD”] // oh!no!</p>
+<p>由于Symbol常量PASSWORD被定义在a.js所在的模块中，外面的模块获取不到这个Symbol，也不可能再创建一个一模一样的Symbol出来（因为Symbol是唯一的），因此这个PASSWORD的Symbol只能被限制在a.js内部使用，所以使用它来定义的类属性是没有办法被模块外访问到的，达到了一个私有化的效果。<br>注册和获取全局Symbol<br>通常情况下，我们在一个浏览器窗口中（window），使用Symbol()函数来定义和Symbol实例就足够了。但是，如果你的应用涉及到多个window（最典型的就是页面中使用了iframe），并需要这些window中使用的某些Symbol是同一个，那就不能使用Symbol()函数了，因为用它在不同window中创建的Symbol实例总是唯一的，而我们需要的是在所有这些window环境下保持一个共享的Symbol。这种情况下，我们就需要使用另一个API来创建或获取Symbol，那就是Symbol.for()，它可以注册或获取一个window间全局的Symbol实例：<br>let gs1 = Symbol.for(‘global_symbol_1’)  //注册一个全局Symbol<br>let gs2 = Symbol.for(‘global_symbol_1’)  //获取全局Symbol</p>
+<p>gs1 === gs2  // true</p>
+<p>这样一个Symbol不光在单个window中是唯一的，在多个相关window间也是唯一的了。<br>好了，通过以上这些例子，你现在是不是开始对ES6的这个Symbol功能有点了解了呢？Symbol在JS内部也有很多应用，比如迭代器(Iterator)等，大家可以以此为出发点，发掘出更多相关知识点，深入的理解Symbol的用法和使用场景。</p>
+</div><div class="tags"><a href="/tags/ES6-JavaScript/">ES6 JavaScript</a></div><div class="post-nav"><a class="pre" href="/2019/12/24/hello-world/">Hello World</a><a class="next" href="/2019/07/25/js-basic-questions/">JavaScript 基础面试题</a></div><div id="container"></div><link rel="stylesheet" type="text/css" href="//unpkg.com/gitalk/dist/gitalk.css?v=0.0.0"><script type="text/javascript" src="//cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js?v=0.0.0"></script><script type="text/javascript" src="//unpkg.com/gitalk/dist/gitalk.min.js?v=0.0.0"></script><script>var gitalk = new Gitalk({
+  clientID: 'a3cb922b42c58d027028',
+  clientSecret: 'c2f29aa3937d056e771535723d1d6b099e109d9c',
+  repo: 'bin5i.github.io',
+  owner: 'bin5i',
+  admin: ['bin5i'],
+  id: md5(location.pathname),
+  distractionFreeMode: false
+})
+gitalk.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="http://bin.5i.io"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/技术分享/">技术分享</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活随笔/">生活随笔</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/freebsd/" style="font-size: 15px;">freebsd</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/mongodb/" style="font-size: 15px;">mongodb</a> <a href="/tags/redis/" style="font-size: 15px;">redis</a> <a href="/tags/bash/" style="font-size: 15px;">bash</a> <a href="/tags/pkg/" style="font-size: 15px;">pkg</a> <a href="/tags/pm2/" style="font-size: 15px;">pm2</a> <a href="/tags/postgre/" style="font-size: 15px;">postgre</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/aws-server/" style="font-size: 15px;">aws server</a> <a href="/tags/centos-RHEL/" style="font-size: 15px;">centos RHEL</a> <a href="/tags/JavaScript-面试题/" style="font-size: 15px;">JavaScript 面试题</a> <a href="/tags/ES6-JavaScript/" style="font-size: 15px;">ES6 JavaScript</a> <a href="/tags/linux-command/" style="font-size: 15px;">linux command</a> <a href="/tags/linux-zip-tar-gz-bz2/" style="font-size: 15px;">linux zip tar gz bz2</a> <a href="/tags/news/" style="font-size: 15px;">news</a> <a href="/tags/node-js-eventloop-macrotask-microtask/" style="font-size: 15px;">node.js eventloop macrotask microtask</a> <a href="/tags/uber-api/" style="font-size: 15px;">uber api</a> <a href="/tags/redis-cluster/" style="font-size: 15px;">redis cluster</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/udp/" style="font-size: 15px;">udp</a> <a href="/tags/mac-terminal/" style="font-size: 15px;">mac terminal</a> <a href="/tags/mac-iTerm2-hostname/" style="font-size: 15px;">mac iTerm2 hostname</a> <a href="/tags/ssh-proxy/" style="font-size: 15px;">ssh proxy</a> <a href="/tags/api-server-framework/" style="font-size: 15px;">api server framework</a> <a href="/tags/redis-upstart/" style="font-size: 15px;">redis upstart</a> <a href="/tags/html5-file/" style="font-size: 15px;">html5 file</a> <a href="/tags/ubuntu-ufw/" style="font-size: 15px;">ubuntu ufw</a> <a href="/tags/ubuntu-gitlab/" style="font-size: 15px;">ubuntu gitlab</a> <a href="/tags/node-js-modules/" style="font-size: 15px;">node.js modules</a> <a href="/tags/苹果-小时候/" style="font-size: 15px;">苹果 小时候</a> <a href="/tags/ubuntu-vpn/" style="font-size: 15px;">ubuntu vpn</a> <a href="/tags/raspberry3B-ubuntu18-server-wifi/" style="font-size: 15px;">raspberry3B ubuntu18 server wifi</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/04/13/树莓派3B在ubuntu18-04-server上配置无线wifi/">树莓派3B在ubuntu18.04 server上配置无线wifi</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/12/24/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/learn-es6/">ES6新技能</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/js-basic-questions/">JavaScript 基础面试题</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/js-interview-questions/">JavaScript 常用面试题集</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/07/25/nodejs-eventloop-macrotask-microtask/">macrotask and microtask in event loop of node.js</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/18/FreeBSD11-Config/">Configuration on FreeBSD11.2</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/03/04/Install-PostgreSql-on-Ubuntu16.04/">Install PostgreSql on Ubuntu16.04</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/09/install-postgresql-on-ubuntu16-04/">Install PostgreSql on Ubuntu16.04</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/09/13/ubuntu-16-04-kai-ji-zi-qi-dong-jiao-ben/">ubuntu 16.04 redis开机自启动脚本</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.ruanyifeng.com/" title="阮一峰的个人网站" target="_blank">阮一峰的个人网站</a><ul></ul><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript" title="About JavaScript" target="_blank">About JavaScript</a><ul></ul><a href="https://nodejs.org/" title="Node.js" target="_blank">Node.js</a><ul></ul><a href="https://docs.mongodb.com/" title="MongoDB Docs" target="_blank">MongoDB Docs</a><ul></ul><a href="https://www.postgresql.org/" title="PostgreSQL" target="_blank">PostgreSQL</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">Bin 博客.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
